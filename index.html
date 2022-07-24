@@ -1,21 +1,1319 @@
-<meta name="description" content="A brief overview of run chart methodology, including R code examples, and tips to improve the default ggplot output to increase stakeholder engagement"/>
-<meta name="generator" content="xaringan and remark.js"/>
-<meta name="github-repo" content="RobertLobato/supercharge-qi-with-run-charts"/>
-<meta name="twitter:title" content="Supercharge Your Quality Improvement Program with Run Charts"/>
-<meta name="twitter:description" content="A brief overview of run chart methodology, including R code examples, and tips to improve the default ggplot output to increase stakeholder engagement"/>
-<meta name="twitter:url" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/"/>
-<meta name="twitter:image" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/images/supercharge-qi-with-runcharts_social.png"/>
-<meta name="twitter:image:alt" content=""/>
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:creator" content="@RobertLobatoMD"/>
-<meta name="twitter:site" content="@RobertLobatoMD"/>
-<meta property="og:title" content="Supercharge Your Quality Improvement Program with Run Charts"/>
-<meta property="og:description" content="A brief overview of run chart methodology, including R code examples, and tips to improve the default ggplot output to increase stakeholder engagement"/>
-<meta property="og:url" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/"/>
-<meta property="og:image" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/images/supercharge-qi-with-runcharts_social.png"/>
-<meta property="og:image:alt" content=""/>
-<meta property="og:type" content="website"/>
-<meta property="og:locale" content="en_US"/>
-<meta property="article:author" content="Robert L Lobato MD"/>
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Supercharge Your QI Program With Run Charts</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Robert L. Lobato, MD, MS" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <meta name="description" content="A brief overview of run chart methodology, including R code examples, and tips to improve the default ggplot output to increase stakeholder engagement"/>
+    <meta name="generator" content="xaringan and remark.js"/>
+    <meta name="github-repo" content="RobertLobato/supercharge-qi-with-run-charts"/>
+    <meta name="twitter:title" content="Supercharge Your Quality Improvement Program with Run Charts"/>
+    <meta name="twitter:description" content="A brief overview of run chart methodology, including R code examples, and tips to improve the default ggplot output to increase stakeholder engagement"/>
+    <meta name="twitter:url" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/"/>
+    <meta name="twitter:image" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/images/supercharge-qi-with-runcharts_social.png"/>
+    <meta name="twitter:image:alt" content=""/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:creator" content="@RobertLobatoMD"/>
+    <meta name="twitter:site" content="@RobertLobatoMD"/>
+    <meta property="og:title" content="Supercharge Your Quality Improvement Program with Run Charts"/>
+    <meta property="og:description" content="A brief overview of run chart methodology, including R code examples, and tips to improve the default ggplot output to increase stakeholder engagement"/>
+    <meta property="og:url" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/"/>
+    <meta property="og:image" content="https://robertlobato.github.io/supercharge-qi-with-run-charts/images/supercharge-qi-with-runcharts_social.png"/>
+    <meta property="og:image:alt" content=""/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:locale" content="en_US"/>
+    <meta property="article:author" content="Robert L Lobato MD"/>
+    <link rel="stylesheet" href="xaringan/unmc-xaringan-template.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan/unmc-xaringan-template-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan/xaringan-full-page-plot.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan/remove-slide-number.css" type="text/css" />
+    <link rel="stylesheet" href="xaringan/width.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
 
-<h1>empty</h1>
+.title[
+# Supercharge Your QI Program With Run Charts
+]
+.subtitle[
+## R/Medicine 2022 | August 25
+]
+.author[
+### Robert L. Lobato, MD, MS
+]
+.institute[
+### Chief, Division of Multispecialty Anesthesiology<br>University of Nebraska Medical Center
+]
+
+---
+
+
+
+
+
+# The Goal of QI is to Refine a Process
+
+### Three Fundamental Steps
+
+--
+
+1. **Reduce variation** in how a process is performed by establishing a standardized practice using evidence-based guidelines
+
+--
+
+2. Deploy the standardized practice in a test environment and **measure improvement**
+
+--
+
+3. Expand adoption and **sustain improvements** over time
+
+---
+
+# The Goal of QI is to Refine a Process
+
+&lt;br&gt;
+
+--
+.center[
+
+ ## 1. How do you know that your QI program is working?
+
+]
+
+&lt;br&gt;
+
+--
+.center[
+
+ ## 2. How do you communicate your progress to stakeholders?
+
+]
+
+---
+
+class: title-slide-section-white, middle, hide-logo
+
+.center[
+# Run Charts&lt;span style="color:#666666"&gt; are an answer&lt;br&gt;to both these questions&lt;/span&gt; 
+]
+---
+background-image: url("images/basic_run_chart.png")
+background-position: 50% 100%
+background-size: 70%
+
+# What Are Run Charts?
+
+### Developed in the 1920s by Walter Shewhart of Bell Labs
+
+--
+1. Plot an **outcome of interest** against a **relevant time interval**
+
+--
+2. Calculate a **median** and examine process **variation** 
+
+---
+background-image: url("images/basic_run_chart_with_shift.png")
+background-position: 50% 100%
+background-size: 70%
+
+# How Can Run Charts Improve QI?
+
+--
+
+- Pre-define number of **consecutive events** above or below the baseline that constitute a **run**
+
+--
+
+- When a run is identified, a **new median** is calculated
+
+???
+
+Tremendously simple, but amazingly powerful
+
+---
+
+class:center,middle
+
+# Example from Clinical Practice
+
+---
+
+# University of Nebraska Medical Center&lt;br&gt;Department of Anesthesiology
+
+.pull-left.w65[
+- Level 1 trauma center in Omaha
+
+- Nebraska's only anesthesiology training program
+
+- Anesthesiologists, CRNAs, and anesthesiology residents
+
+- ~25,000 adult anesthetics per year
+]
+
+.pull-right.w30[
+&lt;img src="images/unmc_dusk.jpg" width="7040" /&gt;
+]
+
+???
+
+The clinical example I want to use comes from my clinical work at UNMC
+
+---
+background-image: url("images/nausea.png")
+background-position: 85% 50%
+background-size: 20%
+
+class:highlight-last-item
+
+# Post Operative Nausea and Vomiting&lt;br&gt;(PONV)
+
+- Common phenomenon after anesthesia
+
+--
+- Important patient-centered outcome
+
+--
+- Associated with increased healthcare cost
+
+--
+- Well-recognized risk factors
+
+--
+- Evidence-based society guidelines for&lt;br&gt;**preventative treatment**
+
+???
+
+Excellent candidate for a QI program
+
+---
+
+# PONV as a CMS MIPS Measure
+
+&lt;img src="images/MIPS_430.png" width="90%" /&gt;
+
+**CMS:** Center for Medicare and Medicaid Services&lt;br&gt;
+**MIPS:** Merit-Based Incentive Payment System (Part of the Quality Payment Program)
+---
+
+# UNMC MIPS 430 Performance
+
+<div id="kulsjyfnkq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#kulsjyfnkq .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kulsjyfnkq .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kulsjyfnkq .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kulsjyfnkq .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kulsjyfnkq .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kulsjyfnkq .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kulsjyfnkq .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kulsjyfnkq .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kulsjyfnkq .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#kulsjyfnkq .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kulsjyfnkq .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kulsjyfnkq .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kulsjyfnkq .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kulsjyfnkq .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kulsjyfnkq .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kulsjyfnkq .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kulsjyfnkq .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kulsjyfnkq .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kulsjyfnkq .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#kulsjyfnkq .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kulsjyfnkq .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kulsjyfnkq .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kulsjyfnkq .gt_left {
+  text-align: left;
+}
+
+#kulsjyfnkq .gt_center {
+  text-align: center;
+}
+
+#kulsjyfnkq .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kulsjyfnkq .gt_font_normal {
+  font-weight: normal;
+}
+
+#kulsjyfnkq .gt_font_bold {
+  font-weight: bold;
+}
+
+#kulsjyfnkq .gt_font_italic {
+  font-style: italic;
+}
+
+#kulsjyfnkq .gt_super {
+  font-size: 65%;
+}
+
+#kulsjyfnkq .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#kulsjyfnkq .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#kulsjyfnkq .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kulsjyfnkq .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#kulsjyfnkq .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#kulsjyfnkq .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1"></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">academic_year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">surgery_month</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1">success_rate</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2020-07-01</td>
+<td class="gt_row gt_right">89.2%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2020-08-01</td>
+<td class="gt_row gt_right">88.8%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2020-09-01</td>
+<td class="gt_row gt_right">89.6%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2020-10-01</td>
+<td class="gt_row gt_right">92.3%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2020-11-01</td>
+<td class="gt_row gt_right">92.5%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2020-12-01</td>
+<td class="gt_row gt_right">89.7%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2021-01-01</td>
+<td class="gt_row gt_right">93.1%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2021-02-01</td>
+<td class="gt_row gt_right">90.9%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub"></td>
+<td class="gt_row gt_center">2021</td>
+<td class="gt_row gt_center">2021-03-01</td>
+<td class="gt_row gt_right">93.0%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub gt_grand_summary_row gt_first_grand_summary_row">mean</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row">&mdash;</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_first_grand_summary_row">&mdash;</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_first_grand_summary_row">91.00%</td></tr>
+    <tr><td class="gt_row gt_right gt_stub gt_grand_summary_row gt_last_summary_row">median</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_last_summary_row">&mdash;</td>
+<td class="gt_row gt_center gt_grand_summary_row gt_last_summary_row">&mdash;</td>
+<td class="gt_row gt_right gt_grand_summary_row gt_last_summary_row">90.87%</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+???
+
+Outcome of interest. Relevant time interval. Job for a Run Chart.
+---
+
+# {runcharter}&lt;span style="color:#666666"&gt; by John MacKintosh&lt;/span&gt;
+
+.pull-left.w75[
+&lt;img src="images/mackintosh_talk_screencap.png" width="2707" /&gt;
+
+### R/Medicine 2020 Lightning Talk
+]
+
+.pull-right.w20[
+&lt;br&gt;
+&lt;br&gt;
+&lt;img src="images/mackintosh_talk_qr.png" width="600" /&gt;
+]
+
+---
+
+# 
+
+.pull-left[
+
+
+```r
+library(runcharter)
+
+runchart_output &lt;- ponv_data_baseline %&gt;% 
+  runcharter(
+*   datecol = surgery_month,
+    yval = success_rate,
+    grpvar = plot_group,
+    med_rows = 9,
+    runlength = 3,
+    direction = "both" 
+  )
+```
+
+]
+
+.pull-right[
+&lt;br&gt;
+## Variable containing &lt;br&gt;**time interval**
+]
+
+---
+
+# 
+
+.pull-left[
+
+
+```r
+library(runcharter)
+
+runchart_output &lt;- ponv_data_baseline %&gt;% 
+  runcharter(
+    datecol = surgery_month,
+*   yval = success_rate,
+    grpvar = plot_group,
+    med_rows = 9,
+    runlength = 3,
+    direction = "both" 
+  )
+```
+
+]
+
+.pull-right[
+&lt;br&gt;
+## Variable containing &lt;br&gt;**outcome of interest**
+]
+
+---
+
+# 
+
+.pull-left[
+
+
+```r
+library(runcharter)
+
+runchart_output &lt;- ponv_data_baseline %&gt;% 
+  runcharter(
+    datecol = surgery_month,  
+    yval = success_rate,
+    grpvar = plot_group,
+*   med_rows = 9,
+    runlength = 3,
+    direction = "both" 
+  )
+```
+
+]
+
+.pull-right[
+&lt;br&gt;
+## Variable containing &lt;br&gt;**number of observations**&lt;br&gt;used to calculate&lt;br&gt;initial baseline
+]
+
+---
+
+# 
+
+.pull-left[
+
+
+```r
+library(runcharter)
+
+runchart_output &lt;- ponv_data_baseline %&gt;% 
+  runcharter(
+    datecol = surgery_month,  
+    yval = success_rate, 
+    grpvar = plot_group,
+    med_rows = 9, 
+*   runlength = 3,
+    direction = "both" 
+  )
+```
+
+]
+
+.pull-right[
+&lt;br&gt;
+## Variable containing &lt;br&gt;**number of consecutive events** that define a run
+]
+
+---
+
+# 
+
+.pull-left[
+
+
+```r
+library(runcharter)
+
+runchart_output &lt;- ponv_data_baseline %&gt;% 
+  runcharter(
+    datecol = surgery_month,
+    yval = success_rate,
+    grpvar = plot_group,
+    med_rows = 9,
+    runlength = 3,
+*   direction = "both"
+  )
+```
+
+]
+
+.pull-right[
+&lt;br&gt;
+## Analyze for shifts &lt;br&gt;**above** and **below** the baseline
+]
+
+---
+
+# 
+
+.pull-left[
+
+
+```r
+library(runcharter)
+
+runchart_output &lt;- ponv_data_baseline %&gt;% 
+  runcharter(
+    datecol = surgery_month,  
+    yval = success_rate,
+*   grpvar = plot_group,
+    med_rows = 9,
+    runlength = 3,
+    direction = "both" 
+  )
+```
+
+]
+
+.pull-right[
+&lt;br&gt;
+## Variable containing &lt;br&gt;**group**&lt;br&gt;(to be used for faceting)
+]
+
+---
+
+# &lt;span style="color:black"&gt;{runcharter}&lt;/span&gt; Output
+
+.pull-left.w65[
+
+```
+## $runchart
+```
+
+![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+
+```
+## 
+## $sustained
+##    plot_group    median start_date   end_date  extend_to run_type
+## 1:          1 0.9087302 2020-07-01 2021-03-01 2021-04-01 baseline
+```
+]
+
+--
+
+.pull-right.w30[
+  &lt;br&gt;
+  1. ggplot run chart
+  &lt;br&gt;
+  &lt;br&gt;
+  2. Calculation of medians&lt;br&gt;(with rebasing)
+]
+
+---
+
+class: full, hide-logo
+
+&lt;img src="index_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+???
+
+Very nice plot. Sensible number of decimal places. Identification of dates. Faceting label.
+
+---
+
+# Baseline Performance on MIPS 430
+
+&lt;br&gt;
+&lt;br&gt;
+
+.pull-left.w60[
+![](index_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+]
+
+.pull-right.w35[
+
+- Stable process
+
+- **"Common cause"** variation
+
+]
+
+???
+
+From a QI point of view we see
+
+---
+
+# Adding &lt;span style="color:black"&gt;{ggplot}&lt;/span&gt; Detail to Run Charts
+
+
+```r
+*runchart_output$runchart + # &lt;- this is a ggplot object
+  facet_null() +
+  theme_ipsum_rc() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_x_date(date_labels = "%b %Y") +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank()) +
+  labs(title = "MIPS 430 Success Rate by Month",
+       subtitle = "Prevention of PONV - Combination Therapy")
+```
+
+---
+
+# Adding &lt;span style="color:black"&gt;{ggplot}&lt;/span&gt; Detail to Run Charts
+
+
+```r
+runchart_output$runchart +
+* facet_null() +                                                                # &lt;- remove faceting
+* theme_ipsum_rc() +                                                            # &lt;- apply a theme
+* scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +           # &lt;- reformat axes
+* scale_x_date(date_labels = "%b %Y") +                                         # &lt;- reformat axes
+* theme(panel.grid.minor = element_blank(),
+*       panel.grid.major = element_blank()) +
+* labs(title = "MIPS 430 Success Rate by Month",                                # &lt;- add title &amp; subtitle
+*      subtitle = "Prevention of PONV - Combination Therapy")                   # &lt;- add title &amp; subtitle
+```
+
+---
+
+class: full, hide-logo
+
+&lt;img src="index_files/figure-html/runchart-baseline-detail-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Department-Wide QI Program
+
+# 
+
+--
+
+- Large-group education through departmental **Grand Rounds**
+
+--
+
+- Included as a quarterly metric in our **Value-Based Quality Incentive** program
+
+---
+
+# First Quarter Performance
+
+--
+
+![](index_files/figure-html/runchart-initial-1.png)&lt;!-- --&gt;
+
+---
+
+
+```r
+runchart_output_initial$runchart +
+  facet_null() +
+  theme_ipsum_rc() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
+  scale_x_date(date_labels = "%b %Y") +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank()) +
+  labs(title = "MIPS 430 Success Rate by Month",
+       subtitle = "Prevention of PONV - Combination Therapy") +
+* annotate("rect", xmin = ymd("2020-07-01"), xmax = ymd("2021-04-05"),
+*          ymin = -Inf, ymax = Inf, alpha = 0.15) +
+* geom_vline(xintercept = ymd("2021-04-05")) +
+* annotate("text", x = ymd("2020-11-15"), y = 0.89,
+*          label = "Historical Data", family = "Roboto Condensed") +
+* annotate("text", x = ymd("2021-04-10"), y = 0.89,
+*          hjust = 0, color = "#AD122A", parse=TRUE,
+*          label = "bold('Start of QI Project')", family = "Roboto Condensed")
+```
+
+
+### _ggplot annotation layer geoms using custom fonts, colors, and parsed formatting._ 
+
+--
+
+# Super cool!
+
+---
+
+class: full, hide-logo
+
+&lt;img src="index_files/figure-html/runchart-initial-detail-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: center, middle
+
+&lt;img src="https://media.giphy.com/media/s4VoCsFz8prlhSFCeS/giphy.gif" width="75%" /&gt;
+
+---
+
+# Second Quarter Performance
+
+--
+
+&lt;img src="index_files/figure-html/runchart-intermed-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: center, middle
+
+&lt;img src="https://media.giphy.com/media/dXXhq8duJGAa5MYcBm/giphy.gif" width="50%" /&gt;
+
+---
+
+class: full, hide-logo
+
+&lt;img src="index_files/figure-html/runchart-intermed-with-ellipse-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+???
+
+geom_mark_ellipse from {ggforce}
+
+---
+
+class:
+
+# Sustainability Challenge
+
+.center[
+&lt;img src="images/sustainability.png" width="80%" /&gt;
+]
+
+---
+
+# Department-Wide QI Program &lt;span style="color:black"&gt;Part II&lt;/span&gt;
+
+# 
+--
+
+- Large-group education through departmental **Grand Rounds** 
+
+--
+
+- Metric review at **Monthly Quality Conference**
+
+--
+
+- Individual-clinician level quarterly reports of **Metric Success Rate**
+
+--
+
+- Included as a quarterly metric in our **Value-Based Quality Incentive** program
+
+---
+
+# Clinician-Level Performance Report
+
+.center[
+&lt;img src="images/performance_report.png" width="70%" /&gt;
+]
+
+---
+
+# Third and Fourth Quarter Performance
+
+---
+
+class: full, hide-logo
+
+&lt;img src="index_files/figure-html/runchart-complete-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+
+---
+background-image: url("images/final_runchart.gif")
+background-position: 90% 50%
+background-size: 30%
+
+# Supercharging QI with &lt;span style="color:black"&gt;Run Charts&lt;/span&gt;
+
+--
+- Display both **performance** and&lt;br&gt;**process variation** over time
+
+--
+- Algorithmic analysis of **shifts** in performance
+
+--
+- **Intuitive interpretation** of progress and setbacks
+
+--
+- {runcharter} output easily customizable to&lt;br&gt;**increase stakeholder engagement**
+
+---
+
+class: center
+
+# Thank You!
+
+.pull-left[
+### _R/Medicine 2022_
+
+### R Core Team 
+
+### R Foundation
+
+### R Consortium
+
+### Linux Foundation
+]
+
+.pull-right[
+### John MacKintosh {runcharter}
+
+### {ggplot}, {tidyverse}, {gt}
+
+### Bob Rudis {hrbrthemes}
+
+### Thousands of contributors!
+]
+
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"highlightSpans": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+<style>
+.logo {
+  background-image: url(xaringan/UNMC_Logo_Lobato.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+  width: 120px;
+  height: 120px;
+  z-index: 0;
+}
+</style>
+
+<script>
+document
+  .querySelectorAll(
+    '.remark-slide-content' +
+    ':not(.title-slide)' +
+    // add additional classes to exclude here, e.g.
+    // ':not(.inverse)' +
+    ':not(.hide-logo)'
+  )
+  .forEach(el => {
+    el.innerHTML += '<div class="logo"></div>';
+  });
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

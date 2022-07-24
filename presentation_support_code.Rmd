@@ -1,0 +1,193 @@
+---
+title: "Supporting Code"
+subtitle: "for R/Medicine 2022 Presentation"
+author: ""
+resource_files:
+- config.yml
+runtime: html
+output: 
+    # prettydoc::html_pretty:
+    #   theme: tactile
+    #   highlight: github
+    html_document:
+      css: "unmc-rmarkdown-html-template.css"
+      code_folding: hide
+      number_sections: TRUE
+      # toc: TRUE
+      # toc_float: TRUE
+---
+
+***
+
+```{r options, echo=FALSE}
+library(knitr)
+knitr::opts_chunk$set(tidy='formatR', size='tiny',
+                      fig.width=10, fig.height=6, fig.align='center',
+                      fig.retina = 1, # needs to be explicitly defined for some reason
+                      tidy.opts=list(comment = FALSE, blank=FALSE, width.cutoff=60)
+                      )
+
+## Send warnings and messages to an external file called 'messages.txt'
+unlink('messages.txt') # Start fresh with each run
+hook_log = function(x, options) cat(x, file='messages.txt', append=TRUE)
+knit_hooks$set(warning = hook_log, message = hook_log) 
+```
+
+```{r retrieve-current-git-commit, echo=FALSE}
+gitCommit <- paste0("This document built from git commit ",system("git rev-parse --short HEAD", intern = TRUE),".")
+```
+
+```{r setup,results='hide', warning=FALSE, message=FALSE}
+library(tidyverse)
+library(plotly)
+library(shiny)
+library(scales)             # empirical cumulative density function and other distributions
+library(hrbrthemes)         # nice ggplot theme
+library(showtext)           # Better font handling
+library(gt)                 # Grammar of Tables
+library(lubridate)
+library(runcharter)
+
+theme_set(hrbrthemes::theme_ipsum_rc())
+font_add_google("Roboto Condensed")
+```
+
+```{r}
+ponv_data <- read_rds("ponv_prophylaxis_success_rates_AY2021-2022.rds")
+
+ponv_data_baseline <- ponv_data %>% 
+  filter(surgery_month < "2021-04-30")
+
+ponv_data_initial <- ponv_data %>% 
+  filter(surgery_month < "2021-07-31")
+
+ponv_data_intermed <- ponv_data %>% 
+  filter(surgery_month < "2021-10-31")
+
+ponv_data_complete <- ponv_data %>% 
+  mutate(animate_order = as.integer(as_factor(month_label)))
+```
+
+# Supporting Figures
+
+```{r}
+fig_data <- tribble(~time, ~outcome,
+                    1, 20,
+                    2, 23,
+                    3, 22,
+                    4, 20,
+                    5, 19,
+                    6, 21,
+                    7, 23,
+                    8, 20,
+                    9, 24,
+                    10, 21,
+                    11, 31,
+                    12, 34,
+                    13, 29,
+                    14, 33,
+                    15, 31)
+                    
+median1 <- fig_data %>% 
+  filter(time <= 10) %>% 
+  dplyr::summarize(value = median(outcome))
+
+median2 <- fig_data %>% 
+  filter(time > 10) %>% 
+  dplyr::summarize(value = median(outcome))
+
+fig_data %>% 
+  filter(time <= 10) %>% 
+  ggplot(aes(x = time, y = outcome)) +
+  geom_line() +
+  geom_point() +
+  geom_line(aes(y = median1$value, x = c(1:10)),
+            color = "#AD122A", size = 1) +
+  theme_ipsum_rc() +
+  scale_x_continuous(breaks = c(1:15), limits = c(1,15)) +
+  scale_y_continuous(n.breaks = 9, limits = c(19, 34)) +
+  labs(x = "Time Interval",
+       y = "Outcome",
+       family = "Roboto Condensed") +
+  annotate("label", x = 11, y = median1$value,
+           label = "Median", color = "#AD122A",
+           family = "Roboto Condensed") +
+  theme(panel.grid.minor = element_blank())
+
+ggsave("basic_run_chart.png", height = 8, width = 18, units = "cm")
+
+```
+
+
+```{r}
+fig_data %>% 
+  ggplot(aes(x = time, y = outcome)) +
+  geom_line() +
+  geom_point() +
+  theme_ipsum_rc() +
+  scale_x_continuous(breaks = c(1:15), limits = c(1,15)) +
+  scale_y_continuous(n.breaks = 9, limits = c(19, 34)) +
+  labs(x = "Time Interval",
+       y = "Outcome",
+       family = "Roboto Condensed") +
+  geom_segment(aes(y = median1$value, yend = median1$value,
+                   x = 1, xend = 10),
+            color = "black", size = 1) +
+  geom_segment(aes(y = median2$value, yend = median2$value,
+                x = 11, xend = 15),
+            color = "#AD122A", size = 1) +
+  annotate("label", x = 9.5, y = median2$value,
+           label = "New Median", color = "#AD122A",
+           family = "Roboto Condensed") +
+  theme(panel.grid.minor = element_blank())
+
+ggsave("basic_run_chart_with_shift.png", height = 8, width = 18, units = "cm")
+```
+
+# gganimate
+
+```{r}
+runchart_output_complete <- ponv_data_complete %>%  
+  runcharter(
+    datecol = surgery_month,
+    yval = success_rate,
+    grpvar = plot_group,
+    med_rows = 9,
+    runlength = 3,
+    direction = "both",
+    highlight_fill = "#005EB8",
+    highlight_point_size = 0
+  )
+
+p<- runchart_output_complete$runchart +
+  facet_null() +
+  theme_ipsum_rc() +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1),
+                     limits = c(0.88, NA)) +
+  scale_x_date(date_labels = "%b %Y") +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank()) +
+  labs(title = "MIPS 430 Success Rate by Month",
+       subtitle = "Prevention of PONV - Combination Therapy") +
+  annotate("rect", xmin = ymd("2020-07-01"), xmax = ymd("2021-04-05"),
+           ymin = -Inf, ymax = Inf, alpha = 0.15) + 
+  geom_vline(xintercept = ymd("2021-04-05")) +
+  annotate("text", x = ymd("2020-11-15"), y = 0.88, 
+           label = "Historical Data", family = "Roboto Condensed") +
+  annotate("text", x = ymd("2021-04-10"), y = 0.88, 
+           hjust = 0, parse=TRUE,
+           label = "bold('Start of QI Project')", family = "Roboto Condensed") +
+  geom_vline(xintercept = ymd("2021-10-05")) +
+  annotate("text", x = ymd("2021-10-10"), y = 0.88, 
+           hjust = 0, color = "#AD122A", parse=TRUE,
+           label = "bold('Monthly Metric Reviews\nIndividual Reports')", family = "Roboto Condensed") +
+  transition_reveal(animate_order)
+
+gganimate::animate(p, end_pause = 20)
+gganimate::anim_save("final_runchart.gif")
+```
+
+
+***
+
+`r gitCommit`
