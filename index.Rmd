@@ -17,7 +17,7 @@ output:
     includes:
       after_body: ./xaringan/xaringan-insert-logo.html
       # after_body: ./xaringan/xaringan-insert-plain-logo.html
-      # chakra: libs/remark-latest.min.js
+      chakra: libs/remark-latest.min.js
 ---
 
 ```{r configuration, echo=FALSE, include=FALSE}
@@ -97,39 +97,146 @@ class: title-slide-section-white, middle, hide-logo
 # Run Charts<span style="color:#666666"> are an answer<br>to both these questions</span> 
 ]
 ---
-background-image: url("images/basic_run_chart.png")
-background-position: 50% 100%
+background-image: url("images/concept_run_chart.png")
+background-position: 50% 90%
 background-size: 70%
+
+# What Are Run Charts?
+
+.center[
+### A graphical method for visualizing **process variation**<br>and identifying trends or **changes in performance**
+]
+
+???
+
+ggpomological theme by Garrick Aden-Buie
+---
 
 # What Are Run Charts?
 
 ### Developed in the 1920s by Walter Shewhart of Bell Labs
 
 --
+- Manufacturing
+
+???
+
+Toyota 1950s. Toyota Production System (TPS)
+
+--
+- Business Operations (1990s)
+
+???
+
+Institute for Healthcare Improvement
+--
+
+# 
+
+```{r, echo=FALSE, out.width="70%", fig.align='center'}
+knitr::include_graphics("images/berwick.jpg")
+```
+
+---
+background-image: url("images/basic_run_chart.png")
+background-position: 50% 100%
+background-size: 70%
+
+# How Do We Construct a Run Chart?
+
+--
 1. Plot an **outcome of interest** against a **relevant time interval**
 
 --
-2. Calculate a **median** and examine process **variation** 
+2. Calculate and plot the **median** for the sample
+
+
+???
+
+It sounds too simple to be useful, right?
+
+Can use graph paper, Excel, or R!
+
+---
+background-image: url("images/basic_run_chart.png")
+background-position: 50% 100%
+background-size: 70%
+
+# How Can Run Charts Improve QI?
+
+
+--
+
+1. Illustrating **variation** in an existing process
+
+--
+
+2. Detecting **changes in performance** over time
+
+---
+background-image: url("images/basic_run_chart_lower_variation.png")
+background-position: 50% 100%
+background-size: 70%
+
+# Variation
+
+### Difference between an ideal and an observed process 
+
+--
+- How consistent is a process?
+
+--
+- Graphically, **dispersion around a central tendency**
+
+---
+background-image: url("images/basic_run_chart_lower_variation_example.png")
+background-position: 50% 100%
+background-size: 70%
+
+# Why is Variation Important?
+
+
+--
+1. **Variation** can result from differences in any part of a process
+
+--
+2. QI seeks to **minimize variation** wherever possible
 
 ---
 background-image: url("images/basic_run_chart_with_shift.png")
 background-position: 50% 100%
 background-size: 70%
 
-# How Can Run Charts Improve QI?
+# Detecting a Change in Performance
 
 --
 
-- Pre-define number of **consecutive events** above or below the baseline that constitute a **run**
+- Pre-define number of **consecutive events** above or below the median that constitute a **run**
 
 --
 
 - When a run is identified, a **new median** is calculated
 
+
 ???
 
 Tremendously simple, but amazingly powerful
 
+---
+background-image: url("images/basic_run_chart_with_shift.png")
+background-position: 50% 100%
+background-size: 70%
+
+# Defining a Run
+
+- Pre-specified number of **consecutive events** above or below the median
+
+--
+- Specific to each individual QI program, based on  **"meaningful change"**
+
+
+???
+Depends (in part) on the frequency of observations
 ---
 
 class:center,middle
@@ -605,7 +712,7 @@ knitr::include_graphics("https://media.giphy.com/media/s4VoCsFz8prlhSFCeS/giphy.
 
 --
 
-```{r runchart-intermed, eval=TRUE, echo=FALSE, fig.asp = 9/16, fig.align = 'center', echo = FALSE, out.width = "100%", dpi= 300, message=FALSE, warning=FALSE}
+```{r runchart-intermed, eval=TRUE, echo=FALSE, fig.asp = 9/16, fig.align = 'center', echo = FALSE, out.width = "90%", dpi= 300, message=FALSE, warning=FALSE}
 runchart_output_intermed <- ponv_data_intermed %>% 
   runcharter(
     datecol = surgery_month,
@@ -624,7 +731,8 @@ runchart_output_intermed$runchart +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   scale_x_date(date_labels = "%b %Y") +
   theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank()) +
+        panel.grid.major = element_blank(),
+        plot.margin=unit(c(5,5,0,0),"mm")) +
   labs(title = "MIPS 430 Success Rate by Month",
        subtitle = "Prevention of PONV - Combination Therapy") +
   annotate("rect", xmin = ymd("2020-07-01"), xmax = ymd("2021-04-05"),
@@ -657,7 +765,8 @@ runchart_output_intermed$runchart +
   scale_y_continuous(labels = scales::percent_format(accuracy = 1)) +
   # scale_x_date(date_labels = "%b %Y") +
   theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank()) +
+        panel.grid.major = element_blank(),
+        plot.margin=unit(c(5,5,0,0),"mm")) +
   labs(title = "MIPS 430 Success Rate by Month",
        subtitle = "Prevention of PONV - Combination Therapy") +
   annotate("rect", xmin = ymd("2020-07-01"), xmax = ymd("2021-04-05"),
@@ -678,7 +787,8 @@ runchart_output_intermed$runchart +
 
 ???
 
-geom_mark_ellipse from {ggforce}
+geom_mark_ellipse from {ggforce}.
+Draw attention to a subset of points in a plot
 
 ---
 
@@ -701,6 +811,11 @@ knitr::include_graphics("images/sustainability.png")
 
 - Large-group education through departmental **Grand Rounds** 
 
+- Included as a quarterly metric in our **Value-Based Quality Incentive** program
+
+<br>
+<br>
+
 --
 
 - Metric review at **Monthly Quality Conference**
@@ -708,10 +823,6 @@ knitr::include_graphics("images/sustainability.png")
 --
 
 - Individual-clinician level quarterly reports of **Metric Success Rate**
-
---
-
-- Included as a quarterly metric in our **Value-Based Quality Incentive** program
 
 ---
 
@@ -751,7 +862,8 @@ runchart_output_complete$runchart +
                      limits = c(0.88, NA)) +
   scale_x_date(date_labels = "%b %Y") +
   theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank()) +
+        panel.grid.major = element_blank(),
+        plot.margin=unit(c(5,5,0,0),"mm")) +
   labs(title = "MIPS 430 Success Rate by Month",
        subtitle = "Prevention of PONV - Combination Therapy") +
   annotate("rect", xmin = ymd("2020-07-01"), xmax = ymd("2021-04-05"),
@@ -765,30 +877,43 @@ runchart_output_complete$runchart +
   geom_vline(xintercept = ymd("2021-10-05")) +
   annotate("text", x = ymd("2021-10-10"), y = 0.88, 
            hjust = 0, color = "#AD122A", parse=TRUE,
-           label = "bold('Monthly Metric Reviews\nIndividual Reports')", family = "Roboto Condensed") 
+           label = "bold('Monthly Metric Reviews\nIndividual Performance Reports')", family = "Roboto Condensed") 
 
 # ggsave("images/final_runchart.png", height = 6, width = 8, units = "in")
 ```
 
 
+???
+Increased intensity of feedback restored our performance gain.
+
+New run identified in spring 2022. New median rebased
+
+
 ---
-background-image: url("images/final_runchart.gif")
-background-position: 90% 50%
-background-size: 30%
+background-image: url("images/final_runchart_wide.gif")
+background-position: 50% 90%
+background-size: 45%
 
-# Supercharging QI with <span style="color:black">Run Charts</span>
+# <span style="color:black">Supercharging QI with</span> Run Charts
 
---
-- Display both **performance** and<br>**process variation** over time
+???
+Accessible to diverse audience. No math involved
 
---
-- Algorithmic analysis of **shifts** in performance
+Algorithmic identification of runs is tremendously persuasive. 
+
+Communicate with your audience more effectively.
+
+Themes, fonts, shading, annotation. Animation!
 
 --
 - **Intuitive interpretation** of progress and setbacks
 
 --
-- {runcharter} output easily customizable to<br>**increase stakeholder engagement**
+- Display both **performance change** and **process variation** over time
+
+--
+- {runcharter} output customizable to **increase stakeholder engagement**
+
 
 ---
 

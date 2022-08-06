@@ -50,6 +50,8 @@ library(runcharter)
 
 theme_set(hrbrthemes::theme_ipsum_rc())
 font_add_google("Roboto Condensed")
+
+showtext_auto()
 ```
 
 ```{r}
@@ -65,10 +67,51 @@ ponv_data_intermed <- ponv_data %>%
   filter(surgery_month < "2021-10-31")
 
 ponv_data_complete <- ponv_data %>% 
-  mutate(animate_order = as.integer(as_factor(month_label)))
+  mutate(animate_order = as.numeric(as.factor(surgery_month)))
 ```
 
-# Supporting Figures
+# Concept Figure
+
+```{r}
+library(ggpomological)
+library(dplyr)
+font_add_google("Homemade Apple")
+
+fig_data <- tribble(~time, ~outcome,
+                    1, 20,
+                    2, 23,
+                    3, 22,
+                    4, 20,
+                    5, 19,
+                    6, 21,
+                    7, 23,
+                    8, 20,
+                    9, 24,
+                    10, 21,)
+
+p <- fig_data %>% 
+  filter(time <= 10) %>% 
+  ggplot(aes(x = time, y = outcome)) +
+  geom_point(color = "#828585", size = 3) +
+  geom_line(color = "#828585", size = 1) +
+  theme_pomological_fancy()+
+  labs(x = "Time Interval",
+       y = "Outcome") +
+  theme(panel.grid.minor = element_blank()) #+
+  # transition_reveal(time)
+
+# ggsave("images/concept_run_chart.png", height = 4, width = 9, units = "cm")
+
+paint_pomological(p, height = 472, width = 1062) %>%
+  magick::image_write( "images/concept_run_chart.png")
+
+# gganimate::animate(p, end_pause = 20)
+# gganimate::anim_save("concept_runchart.gif")
+
+```
+
+
+# Basic Figure
 
 ```{r}
 fig_data <- tribble(~time, ~outcome,
@@ -119,6 +162,90 @@ ggsave("basic_run_chart.png", height = 8, width = 18, units = "cm")
 ```
 
 
+# Supporting Figures Demonstrating Variation
+
+```{r}
+fig_data_variation <- tribble(~time, ~outcome,
+                    1, 20,
+                    2, 23,
+                    3, 22,
+                    4, 20,
+                    5, 19,
+                    6, 21,
+                    7, 23,
+                    8, 20,
+                    9, 24,
+                    10, 21.2,
+                    11, 21.5,
+                    12, 20.3,
+                    13, 21,
+                    14, 20.5,
+                    15, 21.5)
+
+median1 <- fig_data_variation %>% 
+  filter(time <= 10) %>% 
+  dplyr::summarize(value = median(outcome))
+
+fig_data_variation %>% 
+  ggplot(aes(x = time, y = outcome)) +
+  geom_line() +
+  geom_point() +
+  theme_ipsum_rc() +
+  scale_x_continuous(breaks = c(1:15), limits = c(1,15)) +
+  scale_y_continuous(n.breaks = 9, limits = c(19, 34)) +
+  labs(x = "Time Interval",
+       y = "Outcome",
+       family = "Roboto Condensed") +
+  geom_segment(aes(y = median1$value, yend = median1$value,
+                   x = 1, xend = 10),
+            color = "black", size = 1) +
+  geom_segment(aes(y = median1$value, yend = median1$value,
+                x = 11, xend = 15),
+            color = "#AD122A", size = 1) +
+  annotate("label", x = 5, y = 26,
+           label = "Original Process\nModerate Variation", color = "black",
+           family = "Roboto Condensed") +
+  annotate("label", x = 13, y = 26,
+           label = "Improved Process\nReduced Variation\nSame Median", color = "#AD122A",
+           family = "Roboto Condensed") +
+  theme(panel.grid.minor = element_blank())
+
+
+ggsave("basic_run_chart_lower_variation.png", height = 8, width = 18, units = "cm")
+```
+
+```{r}
+fig_data_variation %>% 
+  ggplot(aes(x = time, y = outcome)) +
+  geom_line() +
+  geom_point() +
+  theme_ipsum_rc() +
+  scale_x_continuous(breaks = c(1:15), limits = c(1,15)) +
+  scale_y_continuous(n.breaks = 9, limits = c(19, 34)) +
+  labs(x = "Time Interval",
+       y = "Outcome",
+       family = "Roboto Condensed") +
+  geom_segment(aes(y = median1$value, yend = median1$value,
+                   x = 1, xend = 10),
+            color = "black", size = 1) +
+  geom_segment(aes(y = median1$value, yend = median1$value,
+                x = 11, xend = 15),
+            color = "#AD122A", size = 1) +
+  annotate("label", x = 5, y = 26,
+           label = "Original Process\nModerate Variation", color = "black",
+           family = "Roboto Condensed") +
+  annotate("label", x = 13, y = 26,
+           label = "Reduced Variation\nSame Median", color = "#AD122A",
+           family = "Roboto Condensed") +
+  theme(panel.grid.minor = element_blank())
+
+
+ggsave("images/basic_run_chart_lower_variation_example.png", height = 8, width = 18, units = "cm")
+```
+
+# Supporting Figures Demonstrating Run
+
+
 ```{r}
 fig_data %>% 
   ggplot(aes(x = time, y = outcome)) +
@@ -144,9 +271,12 @@ fig_data %>%
 ggsave("basic_run_chart_with_shift.png", height = 8, width = 18, units = "cm")
 ```
 
+
 # gganimate
 
 ```{r}
+library(gganimate)
+
 runchart_output_complete <- ponv_data_complete %>%  
   runcharter(
     datecol = surgery_month,
@@ -156,7 +286,8 @@ runchart_output_complete <- ponv_data_complete %>%
     runlength = 3,
     direction = "both",
     highlight_fill = "#005EB8",
-    highlight_point_size = 0
+    highlight_point_size = 0,
+    line_colr = "black"
   )
 
 p<- runchart_output_complete$runchart +
@@ -166,7 +297,9 @@ p<- runchart_output_complete$runchart +
                      limits = c(0.88, NA)) +
   scale_x_date(date_labels = "%b %Y") +
   theme(panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank()) +
+        panel.grid.major = element_blank(),
+        plot.background = element_rect(colour = "black", fill=NA, size=1),
+        plot.margin=unit(c(5,0,0,0),"mm")) +
   labs(title = "MIPS 430 Success Rate by Month",
        subtitle = "Prevention of PONV - Combination Therapy") +
   annotate("rect", xmin = ymd("2020-07-01"), xmax = ymd("2021-04-05"),
@@ -180,11 +313,12 @@ p<- runchart_output_complete$runchart +
   geom_vline(xintercept = ymd("2021-10-05")) +
   annotate("text", x = ymd("2021-10-10"), y = 0.88, 
            hjust = 0, color = "#AD122A", parse=TRUE,
-           label = "bold('Monthly Metric Reviews\nIndividual Reports')", family = "Roboto Condensed") +
+           label = "bold('Monthly Metric Reviews\nIndividual Performance Reports')", family = "Roboto Condensed") +
   transition_reveal(animate_order)
 
-gganimate::animate(p, end_pause = 20)
-gganimate::anim_save("final_runchart.gif")
+# gganimate::animate(p, end_pause = 20, height = 472, width = 1062, units = "px")
+gganimate::animate(p, end_pause = 20, width = 1062, height = 480, units = "px")
+gganimate::anim_save("images/final_runchart_wide.gif")
 ```
 
 

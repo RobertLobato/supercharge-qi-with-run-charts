@@ -100,39 +100,144 @@ class: title-slide-section-white, middle, hide-logo
 # Run Charts&lt;span style="color:#666666"&gt; are an answer&lt;br&gt;to both these questions&lt;/span&gt; 
 ]
 ---
-background-image: url("images/basic_run_chart.png")
-background-position: 50% 100%
+background-image: url("images/concept_run_chart.png")
+background-position: 50% 90%
 background-size: 70%
+
+# What Are Run Charts?
+
+.center[
+### A graphical method for visualizing **process variation**&lt;br&gt;and identifying trends or **changes in performance**
+]
+
+???
+
+ggpomological theme by Garrick Aden-Buie
+---
 
 # What Are Run Charts?
 
 ### Developed in the 1920s by Walter Shewhart of Bell Labs
 
 --
+- Manufacturing
+
+???
+
+Toyota 1950s. Toyota Production System (TPS)
+
+--
+- Business Operations (1990s)
+
+???
+
+Institute for Healthcare Improvement
+--
+
+# 
+
+&lt;img src="images/berwick.jpg" width="70%" style="display: block; margin: auto;" /&gt;
+
+---
+background-image: url("images/basic_run_chart.png")
+background-position: 50% 100%
+background-size: 70%
+
+# How Do We Construct a Run Chart?
+
+--
 1. Plot an **outcome of interest** against a **relevant time interval**
 
 --
-2. Calculate a **median** and examine process **variation** 
+2. Calculate and plot the **median** for the sample
+
+
+???
+
+It sounds too simple to be useful, right?
+
+Can use graph paper, Excel, or R!
+
+---
+background-image: url("images/basic_run_chart.png")
+background-position: 50% 100%
+background-size: 70%
+
+# How Can Run Charts Improve QI?
+
+
+--
+
+1. Illustrating **variation** in an existing process
+
+--
+
+2. Detecting **changes in performance** over time
+
+---
+background-image: url("images/basic_run_chart_lower_variation.png")
+background-position: 50% 100%
+background-size: 70%
+
+# Variation
+
+### Difference between an ideal and an observed process 
+
+--
+- How consistent is a process?
+
+--
+- Graphically, **dispersion around a central tendency**
+
+---
+background-image: url("images/basic_run_chart_lower_variation_example.png")
+background-position: 50% 100%
+background-size: 70%
+
+# Why is Variation Important?
+
+
+--
+1. **Variation** can result from differences in any part of a process
+
+--
+2. QI seeks to **minimize variation** wherever possible
 
 ---
 background-image: url("images/basic_run_chart_with_shift.png")
 background-position: 50% 100%
 background-size: 70%
 
-# How Can Run Charts Improve QI?
+# Detecting a Change in Performance
 
 --
 
-- Pre-define number of **consecutive events** above or below the baseline that constitute a **run**
+- Pre-define number of **consecutive events** above or below the median that constitute a **run**
 
 --
 
 - When a run is identified, a **new median** is calculated
 
+
 ???
 
 Tremendously simple, but amazingly powerful
 
+---
+background-image: url("images/basic_run_chart_with_shift.png")
+background-position: 50% 100%
+background-size: 70%
+
+# Defining a Run
+
+- Pre-specified number of **consecutive events** above or below the median
+
+--
+- Specific to each individual QI program, based on  **"meaningful change"**
+
+
+???
+Depends (in part) on the frequency of observations
 ---
 
 class:center,middle
@@ -154,7 +259,7 @@ class:center,middle
 ]
 
 .pull-right.w30[
-&lt;img src="images/unmc_dusk.jpg" width="7040" /&gt;
+![](images/unmc_dusk.jpg)&lt;!-- --&gt;
 ]
 
 ???
@@ -200,12 +305,12 @@ Excellent candidate for a QI program
 
 # UNMC MIPS 430 Performance
 
-<div id="kulsjyfnkq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jqmzxtnira" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#kulsjyfnkq .gt_table {
+#jqmzxtnira .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -230,7 +335,7 @@ Excellent candidate for a QI program
   border-left-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_heading {
+#jqmzxtnira .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -242,7 +347,7 @@ Excellent candidate for a QI program
   border-right-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_title {
+#jqmzxtnira .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -254,7 +359,7 @@ Excellent candidate for a QI program
   border-bottom-width: 0;
 }
 
-#kulsjyfnkq .gt_subtitle {
+#jqmzxtnira .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -266,13 +371,13 @@ Excellent candidate for a QI program
   border-top-width: 0;
 }
 
-#kulsjyfnkq .gt_bottom_border {
+#jqmzxtnira .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_col_headings {
+#jqmzxtnira .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -287,7 +392,7 @@ Excellent candidate for a QI program
   border-right-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_col_heading {
+#jqmzxtnira .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -307,7 +412,7 @@ Excellent candidate for a QI program
   overflow-x: hidden;
 }
 
-#kulsjyfnkq .gt_column_spanner_outer {
+#jqmzxtnira .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -319,15 +424,15 @@ Excellent candidate for a QI program
   padding-right: 4px;
 }
 
-#kulsjyfnkq .gt_column_spanner_outer:first-child {
+#jqmzxtnira .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kulsjyfnkq .gt_column_spanner_outer:last-child {
+#jqmzxtnira .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kulsjyfnkq .gt_column_spanner {
+#jqmzxtnira .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -339,7 +444,7 @@ Excellent candidate for a QI program
   width: 100%;
 }
 
-#kulsjyfnkq .gt_group_heading {
+#jqmzxtnira .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -364,7 +469,7 @@ Excellent candidate for a QI program
   vertical-align: middle;
 }
 
-#kulsjyfnkq .gt_empty_group_heading {
+#jqmzxtnira .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -379,15 +484,15 @@ Excellent candidate for a QI program
   vertical-align: middle;
 }
 
-#kulsjyfnkq .gt_from_md > :first-child {
+#jqmzxtnira .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kulsjyfnkq .gt_from_md > :last-child {
+#jqmzxtnira .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kulsjyfnkq .gt_row {
+#jqmzxtnira .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -406,7 +511,7 @@ Excellent candidate for a QI program
   overflow-x: hidden;
 }
 
-#kulsjyfnkq .gt_stub {
+#jqmzxtnira .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -419,7 +524,7 @@ Excellent candidate for a QI program
   padding-right: 5px;
 }
 
-#kulsjyfnkq .gt_stub_row_group {
+#jqmzxtnira .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -433,11 +538,11 @@ Excellent candidate for a QI program
   vertical-align: top;
 }
 
-#kulsjyfnkq .gt_row_group_first td {
+#jqmzxtnira .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kulsjyfnkq .gt_summary_row {
+#jqmzxtnira .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -447,16 +552,16 @@ Excellent candidate for a QI program
   padding-right: 5px;
 }
 
-#kulsjyfnkq .gt_first_summary_row {
+#jqmzxtnira .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_first_summary_row.thick {
+#jqmzxtnira .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kulsjyfnkq .gt_last_summary_row {
+#jqmzxtnira .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -466,7 +571,7 @@ Excellent candidate for a QI program
   border-bottom-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_grand_summary_row {
+#jqmzxtnira .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -476,7 +581,7 @@ Excellent candidate for a QI program
   padding-right: 5px;
 }
 
-#kulsjyfnkq .gt_first_grand_summary_row {
+#jqmzxtnira .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,11 +591,11 @@ Excellent candidate for a QI program
   border-top-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_striped {
+#jqmzxtnira .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kulsjyfnkq .gt_table_body {
+#jqmzxtnira .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -499,7 +604,7 @@ Excellent candidate for a QI program
   border-bottom-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_footnotes {
+#jqmzxtnira .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -513,7 +618,7 @@ Excellent candidate for a QI program
   border-right-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_footnote {
+#jqmzxtnira .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -522,7 +627,7 @@ Excellent candidate for a QI program
   padding-right: 5px;
 }
 
-#kulsjyfnkq .gt_sourcenotes {
+#jqmzxtnira .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -536,7 +641,7 @@ Excellent candidate for a QI program
   border-right-color: #D3D3D3;
 }
 
-#kulsjyfnkq .gt_sourcenote {
+#jqmzxtnira .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -544,36 +649,36 @@ Excellent candidate for a QI program
   padding-right: 5px;
 }
 
-#kulsjyfnkq .gt_left {
+#jqmzxtnira .gt_left {
   text-align: left;
 }
 
-#kulsjyfnkq .gt_center {
+#jqmzxtnira .gt_center {
   text-align: center;
 }
 
-#kulsjyfnkq .gt_right {
+#jqmzxtnira .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kulsjyfnkq .gt_font_normal {
+#jqmzxtnira .gt_font_normal {
   font-weight: normal;
 }
 
-#kulsjyfnkq .gt_font_bold {
+#jqmzxtnira .gt_font_bold {
   font-weight: bold;
 }
 
-#kulsjyfnkq .gt_font_italic {
+#jqmzxtnira .gt_font_italic {
   font-style: italic;
 }
 
-#kulsjyfnkq .gt_super {
+#jqmzxtnira .gt_super {
   font-size: 65%;
 }
 
-#kulsjyfnkq .gt_two_val_uncert {
+#jqmzxtnira .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -582,31 +687,31 @@ Excellent candidate for a QI program
   margin-left: 0.1em;
 }
 
-#kulsjyfnkq .gt_footnote_marks {
+#jqmzxtnira .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#kulsjyfnkq .gt_asterisk {
+#jqmzxtnira .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kulsjyfnkq .gt_slash_mark {
+#jqmzxtnira .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#kulsjyfnkq .gt_fraction_numerator {
+#jqmzxtnira .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#kulsjyfnkq .gt_fraction_denominator {
+#jqmzxtnira .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -681,7 +786,7 @@ Outcome of interest. Relevant time interval. Job for a Run Chart.
 # {runcharter}&lt;span style="color:#666666"&gt; by John MacKintosh&lt;/span&gt;
 
 .pull-left.w75[
-&lt;img src="images/mackintosh_talk_screencap.png" width="2707" /&gt;
+![](images/mackintosh_talk_screencap.png)&lt;!-- --&gt;
 
 ### R/Medicine 2020 Lightning Talk
 ]
@@ -689,7 +794,7 @@ Outcome of interest. Relevant time interval. Job for a Run Chart.
 .pull-right.w20[
 &lt;br&gt;
 &lt;br&gt;
-&lt;img src="images/mackintosh_talk_qr.png" width="600" /&gt;
+![](images/mackintosh_talk_qr.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -870,7 +975,7 @@ runchart_output &lt;- ponv_data_baseline %&gt;%
 ## $runchart
 ```
 
-![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
 ```
 ## 
@@ -894,7 +999,7 @@ runchart_output &lt;- ponv_data_baseline %&gt;%
 
 class: full, hide-logo
 
-&lt;img src="index_files/figure-html/unnamed-chunk-13-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 ???
 
@@ -908,7 +1013,7 @@ Very nice plot. Sensible number of decimal places. Identification of dates. Face
 &lt;br&gt;
 
 .pull-left.w60[
-![](index_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right.w35[
@@ -1033,7 +1138,7 @@ class: center, middle
 
 --
 
-&lt;img src="index_files/figure-html/runchart-intermed-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/runchart-intermed-1.png" width="90%" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -1049,7 +1154,8 @@ class: full, hide-logo
 
 ???
 
-geom_mark_ellipse from {ggforce}
+geom_mark_ellipse from {ggforce}.
+Draw attention to a subset of points in a plot
 
 ---
 
@@ -1070,6 +1176,11 @@ class:
 
 - Large-group education through departmental **Grand Rounds** 
 
+- Included as a quarterly metric in our **Value-Based Quality Incentive** program
+
+&lt;br&gt;
+&lt;br&gt;
+
 --
 
 - Metric review at **Monthly Quality Conference**
@@ -1077,10 +1188,6 @@ class:
 --
 
 - Individual-clinician level quarterly reports of **Metric Success Rate**
-
---
-
-- Included as a quarterly metric in our **Value-Based Quality Incentive** program
 
 ---
 
@@ -1101,24 +1208,37 @@ class: full, hide-logo
 &lt;img src="index_files/figure-html/runchart-complete-1.png" width="100%" style="display: block; margin: auto;" /&gt;
 
 
+???
+Increased intensity of feedback restored our performance gain.
+
+New run identified in spring 2022. New median rebased
+
+
 ---
-background-image: url("images/final_runchart.gif")
-background-position: 90% 50%
-background-size: 30%
+background-image: url("images/final_runchart_wide.gif")
+background-position: 50% 90%
+background-size: 45%
 
-# Supercharging QI with &lt;span style="color:black"&gt;Run Charts&lt;/span&gt;
+# &lt;span style="color:black"&gt;Supercharging QI with&lt;/span&gt; Run Charts
 
---
-- Display both **performance** and&lt;br&gt;**process variation** over time
+???
+Accessible to diverse audience. No math involved
 
---
-- Algorithmic analysis of **shifts** in performance
+Algorithmic identification of runs is tremendously persuasive. 
+
+Communicate with your audience more effectively.
+
+Themes, fonts, shading, annotation. Animation!
 
 --
 - **Intuitive interpretation** of progress and setbacks
 
 --
-- {runcharter} output easily customizable to&lt;br&gt;**increase stakeholder engagement**
+- Display both **performance change** and **process variation** over time
+
+--
+- {runcharter} output customizable to **increase stakeholder engagement**
+
 
 ---
 
